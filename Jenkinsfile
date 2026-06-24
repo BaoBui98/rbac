@@ -12,8 +12,8 @@ pipeline {
     stages {
         stage('Checkout Source Code') {
             steps {
-                // Kéo code mới nhất từ nhánh main
-                git branch: 'main', url: 'https://github.com/BaoBui98/rbac.git'
+                // Sử dụng checkout scm để Jenkins luôn lấy đúng phiên bản code mới nhất từ Webhook
+                checkout scm
             }
         }
 
