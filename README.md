@@ -9,6 +9,11 @@ sudo docker ps
 
 Bước 3: "Chui" vào bên trong Container
 Để thâm nhập vào thẳng thư mục chứa source code (/app) bên trong container, bạn gõ:
+sudo docker exec -it <CONTAINER_ID_CỦA_BẠN> sh
+
+sudo docker ps
+
+sudo docker exec -it 6f315ce5daa3 sh
 
 
 <!-- Deploy -->
