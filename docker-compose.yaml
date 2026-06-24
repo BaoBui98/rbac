@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  # Dịch vụ PostgreSQL Database
+  postgres_db:
+    image: postgres:16-alpine # Sử dụng bản v16 ổn định và nhẹ (alpine)
+    container_name: my_postgres_container
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}      # Tên tài khoản root
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD} # Mật khẩu tài khoản root
+      POSTGRES_DB: ${POSTGRES_DB}          # Tên database mặc định tạo sẵn
+    ports:
+      - "5432:5432"                  # Mở cổng kết nối từ máy bạn vào container
+    volumes:
+      - postgres_data:/var/lib/postgresql/data # Lưu dữ liệu vào ổ đĩa ảo
+
+  # Dịch vụ pgAdmin (Giao diện quản lý qua Web)
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: my_pgadmin_container
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL} # Email để đăng nhập vào pgAdmin
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}   # Mật khẩu để đăng nhập vào pgAdmin
+    ports:
+      - "8080:80"                    # Truy cập pgAdmin qua trình duyệt tại http://localhost:8080
+    depends_on:
+      - postgres_db                  # Chỉ khởi động pgAdmin sau khi Postgres đã chạy
+
+# Định nghĩa ổ đĩa ảo để lưu trữ dữ liệu database lâu dài
+volumes:
+  postgres_data:
