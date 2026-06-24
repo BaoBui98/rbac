@@ -28,6 +28,7 @@ Cuộn trang thẳng xuống dưới cùng phần Pipeline:
 Ở ô Repository URL: Dán link Github của bạn: https://github.com/BaoBui98/rbac.git
 Ở ô Branch Specifier: Sửa thành */main (vì nhánh bạn vừa push lên tên là main).
 Ô Script Path: Giữ nguyên là Jenkinsfile.
+phần Build Triggers, đảm bảo bạn ĐÃ TÍCH CHỌN vào ô "GitHub hook trigger for GITScm polling"
 Bấm "Save".
 
 
