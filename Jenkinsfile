@@ -21,9 +21,8 @@ pipeline {
             steps {
                 script {
                     echo "Đang đóng gói ứng dụng bằng Docker..."
-                    // Build image và đánh tag là latest và build number
-                    sh 'docker build -t ${ECR_REPO}:latest .'
-                    sh 'docker tag ${ECR_REPO}:latest ${ECR_REPO}:${BUILD_NUMBER}'
+                    sh 'docker build -t production-backend-repo .'
+                    sh 'docker tag production-backend-repo:latest ${ECR_REPO}:latest'
                 }
             }
         }
@@ -32,12 +31,8 @@ pipeline {
             steps {
                 script {
                     echo "Đang đăng nhập và đẩy Image lên kho lưu trữ AWS ECR..."
-                    // Tự động đăng nhập vào ECR nhờ vào IAM Role đã gắn (Không cần lộ Access Key)
                     sh 'aws ecr get-login-password --region ${AWS_REGION} | docker login --username AWS --password-stdin ${ECR_REPO}'
-                    
-                    // Push Image lên AWS
                     sh 'docker push ${ECR_REPO}:latest'
-                    sh 'docker push ${ECR_REPO}:${BUILD_NUMBER}'
                 }
             }
         }
