@@ -3,6 +3,13 @@ npm run migration:run
 npm run seed:role
 npm run seed:permission
 
+Bước 2: Tìm Container đang chạy ứng dụng
+Sau khi vào được server, bạn gõ lệnh để liệt kê các container đang sống:
+sudo docker ps
+
+Bước 3: "Chui" vào bên trong Container
+Để thâm nhập vào thẳng thư mục chứa source code (/app) bên trong container, bạn gõ:
+
 
 <!-- Deploy -->
 aws ecr get-login-password --region ap-southeast-1 | docker login --username AWS --password-stdin 527055790396.dkr.ecr.ap-southeast-1.amazonaws.com/production-backend-repo

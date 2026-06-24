@@ -13,4 +13,5 @@ COPY . .
 
 EXPOSE 3000
 
-CMD ["npm", "start"]
+# Tự động chạy Migration (và Seed nếu cần) trước khi bật server
+CMD sh -c "npm run migration:run && npm start"
